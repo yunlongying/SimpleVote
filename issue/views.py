@@ -1,16 +1,19 @@
 from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
+# from django.template import loader
 
 from issue.models import IssueModel
 
 
 def index(request):
     latest_question_list = IssueModel.objects.order_by('-create_date')[:5]
-    template = loader.get_template('issue/index.html')
-    context = {
-        'latest_question_list': latest_question_list,
-    }
-    return HttpResponse(template.render(context, request))
+    # template = loader.get_template('issue/index.html')
+    # context = {
+    #     'latest_question_list': latest_question_list,
+    # }
+    # return HttpResponse(template.render(context, request))
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'issue/index.html', context)
 
 
 def list_issue(request):

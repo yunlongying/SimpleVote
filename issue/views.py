@@ -2,6 +2,21 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.template import loader
+
+from issue.models import IssueModel
+
+
+def index(request):
+    latest_question_list = IssueModel.objects.order_by('-create_date')[:5]
+    # output = ', '.join([q.issue_name for q in latest_question_list])
+    template = loader.get_template('issue/index.html')
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    tmp = template.render(context, request)
+    return HttpResponse(template.render(context, request))
+    # return HttpResponse(output)
 
 
 def list_issue(request):

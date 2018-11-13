@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Detail</title>
+</head>
+<body>
+{% if question %}
+    <div>问题：{{ question.issue_name }}</div>
+    <form>
+    {% for choice in question.choice %}
+    <input type="radio" name="choice" value="choice">{{ choice }}<br>
+    {% endfor %}
+    </form>
+{% endif %}
+</body>
+</html>
